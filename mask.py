@@ -1,5 +1,5 @@
 import sys
-import tensorflow as tf
+import tensorflow as tf  
 
 from PIL import Image, ImageDraw, ImageFont
 from transformers import AutoTokenizer, TFBertForMaskedLM
@@ -14,7 +14,6 @@ K = 3
 FONT = ImageFont.truetype("assets/fonts/OpenSans-Regular.ttf", 28)
 GRID_SIZE = 40
 PIXELS_PER_WORD = 200
-
 
 def main():
     text = input("Text: ")
@@ -39,14 +38,16 @@ def main():
     # Visualize attentions
     visualize_attentions(inputs.tokens(), result.attentions)
 
-
+#We turned down a narrow lane and passed through a small [MASK].
 def get_mask_token_index(mask_token_id, inputs):
     """
     Return the index of the token with the specified `mask_token_id`, or
     `None` if not present in the `inputs`.
     """
-    # TODO: Implement this function
-    raise NotImplementedError
+    encodingList = inputs._encodings
+    listOfIds = encodingList[0].ids
+    result = listOfIds.index(mask_token_id)
+    return result 
 
 
 
